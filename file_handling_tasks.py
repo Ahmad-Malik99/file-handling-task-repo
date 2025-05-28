@@ -1,44 +1,74 @@
-# file_handling_tasks.py
-
-# This file includes placeholders for file handling tasks.
-# Students should complete each function according to the instructions.
+import csv
+import json
 
 def task1_create_file():
-    # TODO: Create a new text file and write "Hello, world!" to it.
-    pass
+    with open("sample.txt", "w") as file:
+        file.write("Hello, world!")
 
 def task2_read_file():
-    # TODO: Read the contents of a file and print them to the console.
-    pass
+    with open("sample.txt", "r") as file:
+        content = file.read()
+        print(content)
 
 def task3_append_file():
-    # TODO: Append a new line of text to an existing file.
-    pass
+    with open("sample.txt", "a") as file:
+        file.write("\nThis is a new line.")
 
 def task4_count_lines():
-    # TODO: Count and print the number of lines in a file.
-    pass
+    with open("sample.txt", "r") as file:
+        lines = file.readlines()
+        print("Number of lines:", len(lines))
 
 def task5_find_word():
-    # TODO: Find whether a specific word exists in the file and how many times.
-    pass
+    word_to_find = "Hello"
+    with open("sample.txt", "r") as file:
+        content = file.read()
+        count = content.count(word_to_find)
+        print(f"The word '{word_to_find}' was found {count} times.")
 
 def task6_copy_file():
-    # TODO: Copy the contents of one file to another.
-    pass
+    with open("sample.txt", "r") as source:
+        content = source.read()
+    with open("copy_sample.txt", "w") as destination:
+        destination.write(content)
 
 def task7_replace_word():
-    # TODO: Replace a specific word in the file with another word.
-    pass
+    word_to_replace = "Hello"
+    replacement_word = "Hi"
+    with open("sample.txt", "r") as file:
+        content = file.read()
+    new_content = content.replace(word_to_replace, replacement_word)
+    with open("sample.txt", "w") as file:
+        file.write(new_content)
 
 def task8_read_csv():
-    # TODO: Read a CSV file and print each row.
-    pass
+    with open("data.csv", "r", newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            print(row)
 
 def task9_write_csv():
-    # TODO: Write a list of dictionaries to a CSV file.
-    pass
+    data = [
+        {"Name": "Alice", "Age": 25},
+        {"Name": "Bob", "Age": 30},
+        {"Name": "Charlie", "Age": 22}
+    ]
+    with open("output.csv", "w", newline='') as csvfile:
+        fieldnames = ["Name", "Age"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
 
 def task10_json_file():
-    # TODO: Create a JSON file from a Python dictionary and read it back.
-    pass
+    data = {
+        "name": "Alice",
+        "age": 25,
+        "city": "New York"
+    }
+    with open("data.json", "w") as jsonfile:
+        json.dump(data, jsonfile, indent=4)
+
+    with open("data.json", "r") as jsonfile:
+        read_data = json.load(jsonfile)
+        print(read_data)
